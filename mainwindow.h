@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 
-#include "imageslistmodel.h"
+class ImagesListModel;
+class ImagesManagerWindow;
+class WorkingWindow;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,5 +28,7 @@ private:
     Ui::MainWindow *ui;
 
     ImagesListModel * m_shared_model;
+    ImagesManagerWindow * m_manager;
+    WorkingWindow * m_canvas;
 };
 #endif // MAINWINDOW_H

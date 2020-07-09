@@ -1,8 +1,6 @@
 #include "workingwindow.h"
 #include "ui_workingwindow.h"
 
-#include <QGraphicsPathItem>
-
 WorkingWindow::WorkingWindow(ImagesListModel *model, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WorkingWindow)
@@ -13,6 +11,8 @@ WorkingWindow::WorkingWindow(ImagesListModel *model, QWidget *parent) :
 
     connect(model, &ImagesListModel::imageAdded, this, &WorkingWindow::imageAdded);
     connect(model, &ImagesListModel::imageRemoved, this, &WorkingWindow::imageRemoved);
+    connect(model, &ImagesListModel::movedAbove, ui->imagesView->selectionModel(),
+            &QItemSelectionModel::setCurrentIndex);
 }
 
 WorkingWindow::~WorkingWindow()
@@ -28,4 +28,22 @@ void WorkingWindow::imageAdded(QGraphicsPixmapItem * img)
 void WorkingWindow::imageRemoved(QGraphicsPixmapItem *img)
 {
     ui->graphicsView->scene()->removeItem(img);
+}
+
+void WorkingWindow::on_moveAbove_clicked()
+{
+    auto model = qobject_cast<ImagesListModel*>(ui->imagesView->model());
+    for (auto &i: ui->imagesView->selectionModel()->selectedRows())
+    {
+        model->pull(i.row());
+    }
+}
+
+void WorkingWindow::on_moveBelow_clicked()
+{
+    auto model = qobject_cast<ImagesListModel*>(ui->imagesView->model());
+    for (auto &i: ui->imagesView->selectionModel()->selectedRows())
+    {
+        model->push(i.row());
+    }
 }

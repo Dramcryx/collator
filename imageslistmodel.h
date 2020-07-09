@@ -2,6 +2,7 @@
 #define IMAGESLISTMODEL_H
 
 #include <QAbstractListModel>
+#include <QItemSelectionModel>
 
 #include "movablepixmap.h"
 
@@ -18,9 +19,15 @@ public:
     void addImage(const QString & img);
     void removeImage(int index);
 
+    void pull(int index);
+    void push(int index);
+
 signals:
     void imageAdded(QGraphicsPixmapItem * img);
     void imageRemoved(QGraphicsPixmapItem * img);
+
+    // when moving down in list, it does not save selection unlike moving up
+    void movedAbove(const QModelIndex & index, QItemSelectionModel::SelectionFlag flags);
 
 private:
     QList<MovablePicture*> m_images;

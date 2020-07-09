@@ -23,6 +23,10 @@ private slots:
     void imageAdded(QGraphicsPixmapItem *img);
     void imageRemoved(QGraphicsPixmapItem *img);
 
+    void on_moveAbove_clicked();
+
+    void on_moveBelow_clicked();
+
 private:
     Ui::WorkingWindow *ui;
 };

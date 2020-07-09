@@ -9,6 +9,8 @@ ImagesManagerWindow::ImagesManagerWindow(ImagesListModel *model, QWidget *parent
 {
     ui->setupUi(this);
     ui->imagesView->setModel(model);
+    connect(model, &ImagesListModel::movedAbove, ui->imagesView->selectionModel(),
+            &QItemSelectionModel::setCurrentIndex);
 }
 
 ImagesManagerWindow::~ImagesManagerWindow()

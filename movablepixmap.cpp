@@ -10,7 +10,7 @@ MovablePicture::MovablePicture(QGraphicsItem *parent): QGraphicsPixmapItem(paren
 
 MovablePicture::MovablePicture(const QString &imagepath, int initialZ, QGraphicsItem *parent):
     QGraphicsPixmapItem(imagepath, parent),
-    m_name(QFileInfo{imagepath}.filePath())
+    m_name(QFileInfo{imagepath}.fileName())
 {
     setZValue(initialZ);
 }
