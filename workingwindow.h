@@ -27,6 +27,10 @@ private slots:
 
     void on_moveBelow_clicked();
 
+    void on_enlarge_clicked();
+
+    void on_reduce_clicked();
+
 private:
     Ui::WorkingWindow *ui;
 };

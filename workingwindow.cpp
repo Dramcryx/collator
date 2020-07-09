@@ -47,3 +47,21 @@ void WorkingWindow::on_moveBelow_clicked()
         model->push(i.row());
     }
 }
+
+void WorkingWindow::on_enlarge_clicked()
+{
+    for (auto &i: ui->imagesView->selectionModel()->selectedRows())
+    {
+        auto image = qvariant_cast<MovablePicture*>(i.data(Qt::UserRole));
+        image->setScale(image->scale() + 0.1);
+    }
+}
+
+void WorkingWindow::on_reduce_clicked()
+{
+    for (auto &i: ui->imagesView->selectionModel()->selectedRows())
+    {
+        auto image = qvariant_cast<MovablePicture*>(i.data(Qt::UserRole));
+        image->setScale(image->scale() - 0.1);
+    }
+}
