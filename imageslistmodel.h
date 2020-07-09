@@ -16,9 +16,11 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     void addImage(const QString & img);
+    void removeImage(int index);
 
 signals:
     void imageAdded(QGraphicsPixmapItem * img);
+    void imageRemoved(QGraphicsPixmapItem * img);
 
 private:
     QList<MovablePicture*> m_images;

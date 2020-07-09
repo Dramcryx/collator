@@ -21,6 +21,8 @@ public:
 private slots:
     void on_addImage_clicked();
 
+    void on_removeImage_clicked();
+
 private:
     Ui::ImagesManagerWindow *ui;
 };

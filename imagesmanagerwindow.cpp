@@ -27,3 +27,13 @@ void ImagesManagerWindow::on_addImage_clicked()
         model->addImage(i);
     }
 }
+
+void ImagesManagerWindow::on_removeImage_clicked()
+{
+    auto rows = ui->imagesView->selectionModel()->selectedRows();
+    auto model = qobject_cast<ImagesListModel*>(ui->imagesView->model());
+    for (auto &i: rows)
+    {
+        model->removeImage(i.row());
+    }
+}

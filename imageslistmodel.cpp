@@ -30,3 +30,13 @@ void ImagesListModel::addImage(const QString &img)
     endInsertRows();
     emit imageAdded(m_images.last());
 }
+
+void ImagesListModel::removeImage(int index)
+{
+    beginRemoveRows(QModelIndex(), index, index + 1);
+    auto save = m_images.at(index);
+    m_images.removeAt(index);
+    endRemoveRows();
+    emit imageRemoved(save);
+    delete save;
+}

@@ -20,7 +20,8 @@ public:
     ~WorkingWindow();
 
 private slots:
-    void imagesAdded(QGraphicsPixmapItem *img);
+    void imageAdded(QGraphicsPixmapItem *img);
+    void imageRemoved(QGraphicsPixmapItem *img);
 
 private:
     Ui::WorkingWindow *ui;
