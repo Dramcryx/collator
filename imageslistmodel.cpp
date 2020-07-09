@@ -28,7 +28,10 @@ void ImagesListModel::addImage(const QString &img)
 {
     int current_size = m_images.size();
     beginInsertRows(QModelIndex(), current_size, current_size + 1);
-    m_images.append(new MovablePicture{img, current_size});
+    auto to_insert = new MovablePicture{img, current_size};
+    connect(to_insert, &MovablePicture::mouseClicked,
+            this, &ImagesListModel::onImageClicked);
+    m_images.append(to_insert);
     endInsertRows();
     emit imageAdded(m_images.last());
 }
@@ -83,4 +86,9 @@ void ImagesListModel::push(int index)
         upper->setZValue(upper->zValue() + 1);
         endMoveRows();
     }
+}
+
+void ImagesListModel::onImageClicked(MovablePicture *img)
+{
+    emit movedAbove(this->index(m_images.indexOf(img)), QItemSelectionModel::ClearAndSelect);
 }

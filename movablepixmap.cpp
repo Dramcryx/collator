@@ -23,6 +23,7 @@ QString MovablePicture::name()
 void MovablePicture::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     setCursor(Qt::ClosedHandCursor);
+    emit mouseClicked(this);
 }
 
 void MovablePicture::mouseMoveEvent(QGraphicsSceneMouseEvent *event)

@@ -31,6 +31,9 @@ signals:
 
 private:
     QList<MovablePicture*> m_images;
+
+private slots:
+    void onImageClicked(MovablePicture *img);
 };
 
 #endif // IMAGESLISTMODEL_H

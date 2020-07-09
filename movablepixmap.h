@@ -3,13 +3,18 @@
 
 #include <QGraphicsPixmapItem>
 
-class MovablePicture: public QGraphicsPixmapItem
+class MovablePicture: public QObject, public QGraphicsPixmapItem
 {
+    Q_OBJECT
+
 public:
     MovablePicture(QGraphicsItem *parent = nullptr);
     MovablePicture(const QString & imagepath, int initialZ = 0, QGraphicsItem *parent = nullptr);
 
     QString name();
+
+signals:
+    void mouseClicked(MovablePicture *item);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
