@@ -22,9 +22,9 @@ void ImagesManagerWindow::on_addImage_clicked()
 {
     auto model = qobject_cast<ImagesListModel*>(ui->imagesView->model());
     for (const auto & i: QFileDialog::getOpenFileNames(this,
-                                                       "Select one or more files to open",
-                                                       "/home",
-                                                       "Images (*.png *.xpm *.jpg)"))
+                                                       "Выберите изображение",
+                                                       QString{},
+                                                       "(*.png *.bmp *.jpg)"))
     {
         model->addImage(i);
     }
