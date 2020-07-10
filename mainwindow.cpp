@@ -15,10 +15,7 @@ MainWindow::MainWindow(QWidget *parent):
     ui->setupUi(this);
 
     m_manager->setWindowFlag(Qt::Window);
-    m_manager->setAttribute(Qt::WA_DeleteOnClose);
-
     m_canvas->setWindowFlag(Qt::Window);
-    m_canvas->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 MainWindow::~MainWindow()

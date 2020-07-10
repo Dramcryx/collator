@@ -2,6 +2,7 @@
 #include "ui_workingwindow.h"
 
 #include <QFileDialog>
+#include <QCloseEvent>
 
 WorkingWindow::WorkingWindow(ImagesListModel *model, QWidget *parent) :
     QWidget(parent),
@@ -83,4 +84,10 @@ void WorkingWindow::on_saveToFile_clicked()
         ui->graphicsView->scene()->render(&painter, image.rect(), rect);
         image.save(filename, selectedFilter.toUtf8());
     }
+}
+
+void WorkingWindow::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+    this->hide();
 }

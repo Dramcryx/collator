@@ -1,6 +1,7 @@
 #include "imageslistmodel.h"
 
 #include <utility>
+#include <memory>
 
 ImagesListModel::ImagesListModel(QObject * parent): QAbstractListModel(parent)
 {
@@ -44,12 +45,10 @@ void ImagesListModel::removeImage(int index)
 {
     beginRemoveRows(QModelIndex(), index, index + 1);
 
-    auto save = m_images.at(index);
-    m_images.removeAt(index);
+    std::unique_ptr<MovablePicture> RAII(m_images.takeAt(index));
 
     endRemoveRows();
-    emit imageRemoved(save);
-    delete save;
+    emit imageRemoved(RAII.get());
 }
 
 void ImagesListModel::pull(int index)

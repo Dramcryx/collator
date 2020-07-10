@@ -2,6 +2,7 @@
 #include "ui_imagesmanagerwindow.h"
 
 #include <QFileDialog>
+#include <QCloseEvent>
 
 ImagesManagerWindow::ImagesManagerWindow(ImagesListModel *model, QWidget *parent):
     QWidget(parent),
@@ -38,4 +39,10 @@ void ImagesManagerWindow::on_removeImage_clicked()
     {
         model->removeImage(i.row());
     }
+}
+
+void ImagesManagerWindow::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+    this->hide();
 }

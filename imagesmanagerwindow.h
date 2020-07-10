@@ -25,6 +25,8 @@ private slots:
 
 private:
     Ui::ImagesManagerWindow *ui;
+
+    void closeEvent(QCloseEvent * event) override;
 };
 
 #endif // IMAGESMANAGERWINDOW_H

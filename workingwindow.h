@@ -35,6 +35,8 @@ private slots:
 
 private:
     Ui::WorkingWindow *ui;
+
+    void closeEvent(QCloseEvent * event) override;
 };
 
 #endif // WORKINGWINDOW_H
