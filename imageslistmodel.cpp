@@ -28,19 +28,25 @@ void ImagesListModel::addImage(const QString &img)
 {
     int current_size = m_images.size();
     beginInsertRows(QModelIndex(), current_size, current_size + 1);
+
     auto to_insert = new MovablePicture{img, current_size};
+    // connect with list selection when clicked
     connect(to_insert, &MovablePicture::mouseClicked,
             this, &ImagesListModel::onImageClicked);
     m_images.append(to_insert);
+
     endInsertRows();
+
     emit imageAdded(m_images.last());
 }
 
 void ImagesListModel::removeImage(int index)
 {
     beginRemoveRows(QModelIndex(), index, index + 1);
+
     auto save = m_images.at(index);
     m_images.removeAt(index);
+
     endRemoveRows();
     emit imageRemoved(save);
     delete save;
@@ -52,10 +58,7 @@ void ImagesListModel::pull(int index)
     {
         beginMoveRows(this->index(index), index, index, this->index(index + 1), index + 1);
 
-        auto tmp = m_images.at(index);
-        m_images.replace(index, m_images.at(index + 1));
-        m_images.replace(index + 1, tmp);
-
+        std::swap(m_images[index], m_images[index + 1]);
 
         auto lower = m_images.at(index);
         lower->setZValue(lower->zValue() - 1);
@@ -73,11 +76,7 @@ void ImagesListModel::push(int index)
     {
         beginMoveRows(QModelIndex(), index, index, QModelIndex(), index - 1);
 
-        // standard swaps don't work
-        auto tmp = m_images.at(index);
-        m_images.replace(index, m_images.at(index - 1));
-        m_images.replace(index - 1, tmp);
-
+        std::swap(m_images[index], m_images[index - 1]);
 
         auto lower = m_images.at(index - 1);
         lower->setZValue(lower->zValue() - 1);

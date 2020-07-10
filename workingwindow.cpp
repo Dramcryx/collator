@@ -71,7 +71,9 @@ void WorkingWindow::on_reduce_clicked()
 void WorkingWindow::on_saveToFile_clicked()
 {
     QString selectedFilter{};
-    auto filename = QFileDialog::getSaveFileName(this, "Сохранить в файл", QString{}, "PNG;;JPG;;BMP", &selectedFilter).append('.').append(selectedFilter.toLower());
+    auto filename = QFileDialog::getSaveFileName(this, "Сохранить в файл", QString{}, "PNG;;JPG;;BMP", &selectedFilter)
+            .append('.')
+            .append(selectedFilter.toLower());
     auto rect = ui->graphicsView->scene()->itemsBoundingRect().toRect();
     // don't render empty pictures
     if (rect.width() * rect.height() > 0)
