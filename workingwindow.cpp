@@ -1,6 +1,8 @@
 #include "workingwindow.h"
 #include "ui_workingwindow.h"
 
+#include <QFileDialog>
+
 WorkingWindow::WorkingWindow(ImagesListModel *model, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WorkingWindow)
@@ -63,5 +65,20 @@ void WorkingWindow::on_reduce_clicked()
     {
         auto image = qvariant_cast<MovablePicture*>(i.data(Qt::UserRole));
         image->setScale(image->scale() - 0.1);
+    }
+}
+
+void WorkingWindow::on_saveToFile_clicked()
+{
+    QString selectedFilter{};
+    auto filename = QFileDialog::getSaveFileName(this, "Сохранить в файл", QString{}, "PNG;;JPG;;BMP", &selectedFilter).append('.').append(selectedFilter.toLower());
+    auto rect = ui->graphicsView->scene()->itemsBoundingRect().toRect();
+    // don't render empty pictures
+    if (rect.width() * rect.height() > 0)
+    {
+        QPixmap image{rect.size()};
+        QPainter painter{&image};
+        ui->graphicsView->scene()->render(&painter, image.rect(), rect);
+        image.save(filename, selectedFilter.toUtf8());
     }
 }

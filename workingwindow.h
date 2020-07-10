@@ -31,6 +31,8 @@ private slots:
 
     void on_reduce_clicked();
 
+    void on_saveToFile_clicked();
+
 private:
     Ui::WorkingWindow *ui;
 };
